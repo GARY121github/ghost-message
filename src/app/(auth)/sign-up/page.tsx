@@ -94,7 +94,7 @@ const RegisterUser = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full gap-6 bg-black">
-      <div className="shadow-2xl p-4 w-[40%]">
+      <div className="p-4 w-[40%]">
         <div className="flex flex-col items-center justify-center gap-3 text-white">
           <h1 className="text-4xl font-bold text-center text-balance">Be a Ghost Messenger</h1>
           <Bot className="animate-spin" />
