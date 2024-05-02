@@ -67,6 +67,7 @@ export async function POST(request: Request) {
         }
 
         user.isVerified = true;
+        
         await user.save();
 
         return Response.json(
