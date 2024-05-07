@@ -17,10 +17,9 @@ export const authOptions: NextAuthOptions = {
                 await dbConnect();
                 try {
                     const user = await UserModel.findOne({
-                        $or: [
-                            { email: credentials.identifier.email }
-                        ]
+                        email: credentials.identifier 
                     });
+
                     if(!user){
                         throw new Error("No user found with this email");
                     }
@@ -60,8 +59,7 @@ export const authOptions: NextAuthOptions = {
             }
             return session;
         }
-    }
-    ,
+    },
     pages: {
         signIn: "/sign-in",
     },
