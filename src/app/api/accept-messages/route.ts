@@ -10,10 +10,6 @@ export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     const user: User = session?.user;
 
-    console.log("Accept Message ");
-    console.log(session);
-    console.log(user);
-
     if (!session || !session.user) {
         return Response.json(
             {
@@ -27,12 +23,12 @@ export async function POST(request: Request) {
     }
 
     const userId = user._id;
-    const { acceptMessage } = await request.json();
+    const { acceptMessages } = await request.json();
 
     try {
         const user = await UserModel.findByIdAndUpdate(
             userId ,
-            { acceptMessage },
+            { isAcceptingMessages : acceptMessages },
             { new: true }
         );
 
@@ -107,7 +103,7 @@ export async function GET(request: Request) {
         return Response.json( 
             {
                 success: true,
-                acceptMessage: user.isAcceptingMessages
+                isAcceptingMessages: user.isAcceptingMessages
             },
             {
                 status: 200

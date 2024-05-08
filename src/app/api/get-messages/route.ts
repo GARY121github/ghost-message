@@ -11,8 +11,6 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     const user: User = session?.user;
 
-    console.log(session);
-
     if (!session || !session.user) {
         return Response.json(
             {
@@ -58,10 +56,10 @@ export async function GET(request: Request) {
             return Response.json(
                 {
                     success: false,
-                    message: "User not found"
+                    message: "Messages are not avaliable"
                 },
                 {
-                    status: 404
+                    status: 401
                 }
             )
         }
@@ -70,7 +68,7 @@ export async function GET(request: Request) {
             {
                 success: true,
                 message: "Messages fetched successfully",
-                data: user[0].messages
+                data: user[0].messages 
             },
             {
                 status: 200
