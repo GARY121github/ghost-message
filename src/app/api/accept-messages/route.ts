@@ -10,6 +10,10 @@ export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     const user: User = session?.user;
 
+    console.log("Accept Message ");
+    console.log(session);
+    console.log(user);
+
     if (!session || !session.user) {
         return Response.json(
             {
@@ -22,7 +26,7 @@ export async function POST(request: Request) {
         )
     }
 
-    const userId = user.id;
+    const userId = user._id;
     const { acceptMessage } = await request.json();
 
     try {
@@ -83,7 +87,7 @@ export async function GET(request: Request) {
         )
     }
 
-    const userId = user.id;
+    const userId = user._id;
 
     try {
         const user = await UserModel.findById(userId);

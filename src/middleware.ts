@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/sign-in', url));
     }
 
+    console.log("Visited: ", url.pathname);
     return NextResponse.next();
 }
 
@@ -32,7 +33,6 @@ export const config = {
         '/sign-in',
         '/sign-up',
         '/',
-        '/dashboard/:path*',
         '/veridy/:path*',
     ]
 }

@@ -11,6 +11,8 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     const user: User = session?.user;
 
+    console.log(session);
+
     if (!session || !session.user) {
         return Response.json(
             {
@@ -23,7 +25,7 @@ export async function GET(request: Request) {
         )
     }
 
-    const userId = new mongoose.Types.ObjectId(user.id);
+    const userId = new mongoose.Types.ObjectId(user._id);
     try {
         const user = await UserModel.aggregate(
             [
@@ -50,6 +52,7 @@ export async function GET(request: Request) {
                 }
             ]
         )
+
 
         if(!user || user.length === 0){
             return Response.json(
