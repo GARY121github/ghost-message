@@ -110,6 +110,14 @@ const loginUser = () => {
           </form>
         </Form>
         <div className="text-center mt-4">
+          <Button 
+          className="w-full"
+          onClick={() => signIn('google')}
+          >
+           <img src="/google.svg" alt="google" className="h-5 w-5 mr-2" /> SignIn with Google
+          </Button>
+        </div>
+        <div className="text-center mt-4">
           <p className="text-white">
             Create a new account ?{' '}
             <Link href="/sign-up" className="text-blue-400 hover:text-blue-600">

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Bot, Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
 
 const RegisterUser = () => {
   const [username, setUsername] = useState('');
@@ -164,6 +165,14 @@ const RegisterUser = () => {
             </Button>
           </form>
         </Form>
+        <div className="text-center mt-4">
+          <Button 
+          className="w-full"
+          onClick={() => signIn('google')}
+          >
+           <img src="/google.svg" alt="google" className="h-5 w-5 mr-2" /> SignUp with Google
+          </Button>
+        </div>
         <div className="text-center mt-4">
           <p className="text-white">
             Already a member ? {' '}
