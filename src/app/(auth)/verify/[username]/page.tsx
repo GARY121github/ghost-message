@@ -1,5 +1,5 @@
 "use client"
-
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { verifySchema } from "@/schemas/verify.schema";
 import { ApiResponse } from "@/types/ApiResponse";
@@ -18,6 +18,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { set } from "mongoose";
+import { Loader2 } from "lucide-react";
 
 const VerifyAccount = () => {
     const router = useRouter();
@@ -26,8 +28,10 @@ const VerifyAccount = () => {
     const form = useForm<z.infer<typeof verifySchema>>({
         resolver: zodResolver(verifySchema)
     });
+    const [isVerifying , setIsVerifying] = useState(false);
 
     const onSubmit = async (data: z.infer<typeof verifySchema>) => {
+        setIsVerifying(true);
         try {
             const response = await axios.post(`/api/verify-code`, {
                 username: params.username,
@@ -38,7 +42,7 @@ const VerifyAccount = () => {
                 title: "Success",
                 description: response.data.message
             });
-            router.replace('sign-in');
+            router.replace('/sign-in');
         } catch (error) {
             console.log("ERROR WHILE VERIFYING USER", error);
             const axiosError = error as AxiosError<ApiResponse>;
@@ -48,6 +52,8 @@ const VerifyAccount = () => {
                 description: errorMessage,
                 variant: "destructive"
             })
+        } finally{
+            setIsVerifying(false);
         }
     }
 
@@ -72,7 +78,15 @@ const VerifyAccount = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" className="w-full">Verify</Button>
+                        <Button type="submit" className="w-full" disabled={isVerifying}>
+                            {
+                                isVerifying ? (
+                                    <>
+                                    <Loader2 className="h-4 w-4 animate-spin"/> verifying...
+                                    </>
+                                ) : "Verify"
+                            }
+                        </Button>
                     </form>
                 </Form>
             </div>
