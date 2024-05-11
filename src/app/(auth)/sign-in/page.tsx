@@ -36,7 +36,6 @@ const loginUser = () => {
 
   // api call to login user
   async function onSubmit(data: z.infer<typeof signInSchema>) {
-    console.log(data);
     setIsSubmitting(true);
     const result = await signIn('credentials', {
       identifier: data.identifier,

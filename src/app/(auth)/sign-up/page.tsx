@@ -29,7 +29,7 @@ const RegisterUser = () => {
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const debounce = useDebounceCallback(setUsername, 500);
-  const { toast } = useToast();
+  const { toast }: { toast: any } = useToast();
   const router = useRouter();
 
   // implementing zod

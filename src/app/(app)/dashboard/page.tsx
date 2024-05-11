@@ -117,7 +117,7 @@ function UserDashboard() {
   };
 
   if (!session || !session.user) {
-    return <Ghost className="h-10 w-10 animate-ping"/>
+    return <Ghost className="h-10 w-10 animate-ping"/> 
   }
 
   const { username } = session.user as User;
@@ -134,7 +134,7 @@ function UserDashboard() {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 rounded w-full max-w-6xl">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
 
       <div className="mb-4">
@@ -144,7 +144,7 @@ function UserDashboard() {
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="input input-bordered w-full p-2 mr-2 rounded-sm"
           />
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
@@ -164,8 +164,7 @@ function UserDashboard() {
       <Separator />
 
       <Button
-        className="mt-4"
-        variant="outline"
+        className="mt-4 bg-slate-900 text-white hover:bg-slate-800"
         onClick={(e) => {
           e.preventDefault();
           fetchMessages(true);
@@ -174,7 +173,7 @@ function UserDashboard() {
         {isLoading ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
-          <RefreshCcw className="h-4 w-4" />
+          <RefreshCcw className="h-4 w-4  " />
         )}
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
