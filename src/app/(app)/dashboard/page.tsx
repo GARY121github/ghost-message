@@ -150,12 +150,13 @@ function UserDashboard() {
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex items-center">
         <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
+          className="data-[state=checked]:bg-blue-400 data-[state=unchecked]:bg-red-400 hover:data-[state=unchecked]:animate-bounce"
         />
         <span className="ml-2">
           Accept Messages: {acceptMessages ? 'On' : 'Off'}
