@@ -68,8 +68,6 @@ export const authOptions: NextAuthOptions = {
                             messages: []
                         });
 
-                        console.log(newUser);
-
                         if (!newUser) {
                             throw new Error("Failed to create user");
                         }

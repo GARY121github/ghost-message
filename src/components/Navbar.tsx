@@ -9,7 +9,7 @@ const Navbar = () => {
     const session = useSession()
     const user: User = session.data?.user;
     const onSignOutHandler = async () => {
-        signOut({ redirect: true, callbackUrl: '/' })
+        signOut()
     }
     return (
         <header className="relative text-white p-4">
