@@ -18,11 +18,11 @@ const MessageCard: React.FC<MessageCardProps> = ({message , onMessageDelete}) =>
   return (
     <div className="bg-white text-black rounded-lg">
       <div className="p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between place-items-start">
           <h1 className="text-lg font-semibold">{message.content}</h1>
           <button
             onClick={() => onMessageDelete(message._id)}
-            className="text-red-500"
+            className="text-red-500 ml-5"
           >
             <Trash2 />
           </button>

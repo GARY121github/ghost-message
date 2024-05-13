@@ -39,6 +39,7 @@ const SendMessage = () => {
         title: 'Success',
         description: 'Message sent successfully',
       });
+      form.setValue('content', '');                                                     
     } catch (error: any) {
       toast({
         title: 'Error',

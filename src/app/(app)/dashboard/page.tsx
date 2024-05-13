@@ -23,8 +23,34 @@ function UserDashboard() {
 
   const { toast }: { toast: any } = useToast();
 
-  const handleDeleteMessage = (messageId: string) => {
-    setMessages(messages.filter((message) => message._id !== messageId));
+  const handleDeleteMessage = async (messageId: string) => {
+
+    const messageIndex = messages.findIndex(message => message._id === messageId);
+    // Store the message in case you need to restore it
+    const messageToRestore = messages[messageIndex];
+
+    // Optimistically remove the message from the UI
+    setMessages(messages => messages.filter(message => message._id !== messageId));
+
+
+    try {
+      await axios.delete<ApiResponse>(`/api/delete-message/${messageId}`);
+      toast({
+        title: 'Message deleted successfully',
+      });
+    } catch (error) {
+
+      setMessages((messages) => [...messages.slice(0, messageIndex), messageToRestore, ...messages.slice(messageIndex)]);
+
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: 'Error',
+        description:
+          axiosError.response?.data.message ?? 'Failed to delete message',
+        variant: 'destructive',
+      });
+      
+    }
   };
 
   const { data: session } = useSession();
@@ -117,7 +143,7 @@ function UserDashboard() {
   };
 
   if (!session || !session.user) {
-    return <Ghost className="h-10 w-10 animate-ping"/> 
+    return <Ghost className="h-10 w-10 animate-ping" />
   }
 
   const { username } = session.user as User;
