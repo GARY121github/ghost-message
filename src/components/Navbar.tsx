@@ -12,8 +12,8 @@ const Navbar = () => {
         signOut()
     }
     return (
-        <header className="relative text-white p-4">
-            <nav className='fixed top-0 left-0 right-0 flex items-center justify-between p-4 bg-gray-800'>
+        <header className="text-white">
+            <nav className='flex items-center justify-between p-4 bg-gray-800'>
                 <Link href='/'>
                     <p className="text-white text-center text-3xl font-bold">Ghost Messenger</p>
                 </Link>
