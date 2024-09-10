@@ -1,46 +1,35 @@
-"use client"
-import React from 'react'
-import Link from 'next/link'
-import { useSession, signOut } from "next-auth/react"
-import { User } from 'next-auth'
-import { Button } from './ui/button'
+'use client'
 
-const Navbar = () => {
-    const session = useSession()
-    const user: User = session.data?.user;
-    const onSignOutHandler = async () => {
-        signOut()
-    }
+import React from 'react';
+import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
+import { Button } from './ui/button';
+import { User } from 'next-auth';
+
+function Navbar() {
+    const { data: session } = useSession();
+    const user: User = session?.user;
+
     return (
-        <header className="text-white">
-            <nav className='flex items-center justify-between p-4 bg-gray-800'>
-                <Link href='/'>
-                    <p className="text-white text-center text-3xl font-bold">Ghost Messenger</p>
-                </Link>
-                {
-                    !user ? (
-                        <div className='flex items-center gap-5'>
-                            <Link href='/sign-in'>
-                                <Button
-                                    variant="outline"
-                                    className='bg-white text-black hover:bg-slate-200'>
-                                    Login
-                                </Button>
-                            </Link>
-                            <Link href='/sign-up'>
-                                <Button className='bg-white text-black hover:bg-slate-200'>Sign Up</Button>
-                            </Link>
-                        </div>
-                    ) : (
-                        <Button
-                            className="bg-white hover:bg-slate-200 text-black"
-                            onClick={onSignOutHandler}
-                        >Sign Out</Button>
-                    )
-                }
-            </nav>
-        </header>
-    )
+        <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+                <a href="/" className="text-xl font-bold mb-4 md:mb-0">
+                    Ghost Messenger
+                </a>
+                {session ? (
+                    <>
+                        <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
+                            Logout
+                        </Button>
+                    </>
+                ) : (
+                    <Link href="/sign-in">
+                        <Button className="w-full md:w-auto bg-slate-100 text-black" variant={'outline'}>Login</Button>
+                    </Link>
+                )}
+            </div>
+        </nav>
+    );
 }
 
-export default Navbar
+export default Navbar;

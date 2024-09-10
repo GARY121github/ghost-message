@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { GoogleGenerativeAIStream, StreamingTextResponse } from "ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GenAI_API_KEY || "");
 

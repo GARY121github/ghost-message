@@ -1,16 +1,11 @@
-"use client"
- import React from 'react'
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
 
- interface layoutProps{
-    children: React.ReactNode
- }
- 
- const layout:React.FC<layoutProps> = ({children}) => {
-   return (
-     <div className="flex flex-col items-center h-screen justify-center bg-black text-white">
-        {children}
-     </div>
-   )
- }
- 
- export default layout
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <div className="flex flex-col min-h-screen bg-black text-white">
+      {children}
+    </div>
+  );
+}
